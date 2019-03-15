@@ -1,5 +1,7 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 const output_path = path.resolve(__dirname, "dist");
 
@@ -18,11 +20,11 @@ module.exports = {
 
     devtool: "inline-source-map",
 
-    watch: true,
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-    },
+    // watch: true,
+    // watchOptions: {
+    //     aggregateTimeout: 300,
+    //     poll: 1000
+    // },
 
     module: {
         rules: [
@@ -60,6 +62,15 @@ module.exports = {
     plugins: [
         new MiniCssExtractPlugin({
             filename: "css/[name].css"
+        }),
+        new HtmlWebpackPlugin({
+            title: "My App timbioz",
+            filename: "index.html",
+            template: "src/views/index.html",
+            hash: true,
+            minify: {
+                html5: true
+            }
         })
     ]
 };
